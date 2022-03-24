@@ -482,7 +482,7 @@ if !exists("*VSCodeNotify") && isdirectory($HOME . "/.vim/plugged/coc.nvim")
 
     let g:coc_custom_config = '1'
     let g:coc_node_path = $HOME . '/.neovim/node/bin/node'
-    " let g:coc_disable_startup_warning = 1
+    let g:coc_disable_startup_warning = 1
 
     let g:vista_default_executive = 'coc'
 
