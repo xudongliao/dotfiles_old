@@ -51,16 +51,16 @@ pull_repo $HOME/.tmux/plugins/tpm
 #######################
 if [[ ! -d $HOME/.zprezto ]]; then
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
 fi
 cd $HOME/.zprezto
 git pull
 git submodule update --init --recursive
 cd - 
+# create link
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
 
 mkdir -p $HOME/.zsh
 
@@ -119,7 +119,8 @@ if [[ ! -d $HOME/.rustup ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 
-for crate in bat fd-find ripgrep exa tealdeer procs ytop hyperfine bandwhich
+# ytop (not maintained) -> bottom 
+for crate in bat fd-find ripgrep exa tealdeer procs bottom hyperfine bandwhich
 do
     $HOME/.cargo/bin/cargo install $crate
 done

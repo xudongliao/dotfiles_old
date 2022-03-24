@@ -44,4 +44,8 @@ for program in ${PROGRAMS[@]}; do
   echo "Configuring $program"
 done
 
+# we may need this due to some bugs
+if [[ ! -d $HOME/.zshrc ]]; then
+  ln -s $HOME/.zprezto/runcoms/zshrc $HOME/.zshrc
+fi
 echo "Done!"

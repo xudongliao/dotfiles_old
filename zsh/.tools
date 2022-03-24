@@ -1,0 +1,73 @@
+#!/bin/bash
+export RED_BEGIN="\033[31m"
+export GREEN_BEGIN="\033[32m"
+export YELLOW_BEGIN="\033[33m"
+export COLOR_END="\033[0m"
+
+
+function error {
+	echo "${RED_BEGIN}[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@${COLOR_END}" >&2
+	# echo -e ${RED_BEGIN}$1${COLOR_END}
+}
+
+function info {
+	echo -e ${GREEN_BEGIN}$1${COLOR_END}
+}
+
+function tip {
+	echo -e ${YELLOW_BEGIN}$1${COLOR_END}
+}
+
+
+function maas {
+	if [ $# -ne 1 ]; then
+		tip "Usage: mass nodename(withour .mass). eg, mass cpu01 "
+		return
+	fi
+	node="$1.maas"
+	host $node 
+	res=$?
+	if [ $res -ne 0 ]; then
+		error "Cannot resolve $node, Start VPN first"
+		return
+	fi
+	ssh xudong@$node
+}
+
+function addkeyto {
+	ssh $1 "mkdir -p .ssh && cat >> .ssh/authorized_keys" < ~/.ssh/id_rsa.pub
+	res=$?
+	if [ $res -ne 0 ]; then
+		error "Failed to add public key to $1"
+		return
+	fi
+	info "Public key added to $1"
+}
+
+function addgitkeyto {
+	scp ~/.ssh/id_gitkey $1:~/.ssh/
+	ssh $1 'echo -e "Host github.com\n\tUser git\n\tIdentityFile ~/.ssh/id_gitkey\n" >> ~/.ssh/config'
+	# config git
+	ssh $1 'git config --global user.name "Xudong Liao" && git config --global user.email "stephenxudong@gmail.com"'
+}
+
+function updateconfig {
+	scp ~/.vimrc cse1:/homes/xliaoaf/public_html/download/vimrc
+	# scp ~/.tmux.conf cse1:/homes/xliaoaf/public_html/download/tmux.conf
+}
+
+
+function startShellIntegration {
+	echo "Starting iTerm2 Shell Integration Service"
+	source ~/.iterm2_shell_integration.zsh
+}
+
+function reload {
+	echo "To reload configure of $1 (from zsh/bash)"
+	source ~/.$1rc
+}
+
+function proxyssh {
+	# ssh to server with proxies
+	ssh -o ProxyCommand="nc -X 5 -x 127.0.0.1:7890 %h %p" $1
+}
