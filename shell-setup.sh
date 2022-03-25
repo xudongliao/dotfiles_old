@@ -65,10 +65,10 @@ done
 mkdir -p $HOME/.zsh
 
 # Fast syntax highlighting
-if [[ ! -d $HOME/.zsh/fast-syntax-highlighting ]]; then
-    git clone https://github.com/zdharma/fast-syntax-highlighting.git $HOME/.zsh/fast-syntax-highlighting
+if [[ ! -d $HOME/.zsh/zsh-syntax-highlighting ]]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh/zsh-syntax-highlighting
 fi
-pull_repo $HOME/.zsh/fast-syntax-highlighting
+pull_repo $HOME/.zsh/zsh-syntax-highlighting
 
 #######################
 # NEOVIM
