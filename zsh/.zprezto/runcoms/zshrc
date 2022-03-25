@@ -60,14 +60,20 @@ bindkey "^[[1;3D" backward-word
 bindkey "^[[1;3A" beginning-of-line
 bindkey "^[[1;3B" end-of-line
 
-if [ -f $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]; then
-  source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+if [ -f $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  if [ -f $HOME/.zsh_highlight ]; then
+    source $HOME/.zsh_highlight
+  fi 
 fi
+
 
 # https://github.com/marlonrichert/zsh-autocomplete
 # if [ -f $HOME/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]; then
 #   source $HOME/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 # fi
+
+
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
