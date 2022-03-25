@@ -1,0 +1,57 @@
+
+# set -x
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+function conda_init() {
+    conda_prefix=$1
+    # echo "start conda at $conda_prefix"
+    __conda_setup="$('$conda_prefix/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$conda_prefix/etc/profile.d/conda.sh" ]; then
+            . "$conda_prefix/etc/profile.d/conda.sh"
+        else
+            export PATH="$conda_prefix/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+}
+
+# <<< conda initialize <<<
+
+# OS dependent aliases
+case "$(uname -s)" in
+
+   Darwin)
+     # 'Mac OS X'
+     # conda is usually installed by brew
+     if [ -d "/opt/miniconda" ]; then
+        conda_init "/opt/miniconda"
+     fi
+     if [ -d "/opt/anaconda3" ]; then
+        conda_init "/opt/anaconda3"
+     fi
+     ;;
+   Linux)
+     # echo 'Linux'
+     if [ -d "$HOME/miniconda" ]; then
+         conda_init "$HOME/miniconda"
+     fi
+     if [ -d "$HOME/anaconda3" ]; then
+         conda_init "$HOME/anaconda3"
+     fi
+     ;;
+
+   CYGWIN*|MINGW32*|MSYS*)
+     # echo 'MS Windows'
+     ;;
+
+   # Add here more strings to compare
+   # See correspondence table at the bottom of this answer
+
+   *)
+     # echo 'other OS'
+     ;;
+esac
