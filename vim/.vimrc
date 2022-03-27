@@ -122,6 +122,7 @@ Plug 'patstockwell/vim-monokai-tasty'
 " Plug 'flazz/vim-colorschemes'          " Bunch of color schemes
 Plug 'sainnhe/sonokai'                 " Monokai Pro-like scheme
 Plug 'tanvirtin/monokai.nvim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'srcery-colors/srcery-vim'
 " Plug 'vim-airline/vim-airline'
 
