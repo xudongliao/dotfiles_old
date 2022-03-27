@@ -1,3 +1,20 @@
 {
-    "git.enableGutters": true
+  "git.enableGutters": true,
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", ".ccls", "compile_commands.json"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls-cache"
+        },
+        "client": {
+          "snippetSupport": true
+        }
+      }
+    }
+  },
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath":"~/.local/bin/black"
 }

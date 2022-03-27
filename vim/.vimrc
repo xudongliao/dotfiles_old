@@ -1,7 +1,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " VI compatible mode is disabled so that VIm things work
-
+set encoding=utf-8
+set fileencoding=utf-8
 " =============================================================================
 "   PLUGINS
 " =============================================================================
@@ -122,6 +123,7 @@ Plug 'patstockwell/vim-monokai-tasty'
 Plug 'sainnhe/sonokai'                 " Monokai Pro-like scheme
 Plug 'tanvirtin/monokai.nvim'
 Plug 'srcery-colors/srcery-vim'
+" Plug 'vim-airline/vim-airline'
 
 " Writing
 Plug 'junegunn/goyo.vim'               " Distraction free mode
@@ -134,7 +136,8 @@ Plug 'wakatime/vim-wakatime'           " Wakatime time tracking
 Plug 'ihsanturk/neuron.vim'            " For neuron Zettelkasten
 Plug 'liuchengxu/vim-which-key'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'              " Code formatter
 if has('nvim-0.5')
     Plug 'phaazon/hop.nvim'
     Plug 'nvim-lua/popup.nvim'
@@ -832,3 +835,11 @@ let $LOCALFILE=expand("~/.vimrc_local")
 if filereadable($LOCALFILE)
     source $LOCALFILE
 endif
+
+" Code Formatter config
+augroup autoformat_settings
+    " autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
+    autocmd FileType go AutoFormatBuffer gofmt
+    " autocmd FileType python AutoFormatBuffer black
+    autocmd FileType rust AutoFormatBuffer rustfmt
+augroup END
