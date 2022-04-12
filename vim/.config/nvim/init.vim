@@ -52,7 +52,7 @@ function! OpenFloatingWin()
         \ signcolumn=no
 endfunction
 
-# restore cursor type
+" restore cursor type
 augroup RestoreCursorShapeOnExit
     autocmd!
     autocmd VimLeave * set guicursor=a:ver20
