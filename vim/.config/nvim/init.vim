@@ -51,3 +51,9 @@ function! OpenFloatingWin()
         \ norelativenumber
         \ signcolumn=no
 endfunction
+
+# restore cursor type
+augroup RestoreCursorShapeOnExit
+    autocmd!
+    autocmd VimLeave * set guicursor=a:ver20
+augroup END

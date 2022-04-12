@@ -67,6 +67,7 @@ if [ -f $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   fi
 fi
 
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=180'
 
 # https://github.com/marlonrichert/zsh-autocomplete
 # if [ -f $HOME/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]; then

@@ -47,7 +47,7 @@ Plug 'tpope/vim-speeddating'          " Dates in vim
 Plug 'itchyny/lightline.vim'          " Better Status Bar
 Plug 'mhinz/vim-startify'             " Better start screen
 Plug 'scrooloose/nerdtree'            " File explorer
-" Plug 'ryanoasis/vim-devicons'         " Nice filetype icons (slow)
+Plug 'ryanoasis/vim-devicons'         " Nice filetype icons (slow)
 
 " Plug 'sjl/gundo.vim'                  " Undo Tree
 Plug 'simnalamburt/vim-mundo'         " Gundo fork
@@ -109,19 +109,21 @@ Plug 'liuchengxu/vista.vim'
 Plug 'vim-python/python-syntax'
 " Plug 'sentientmachine/pretty-vim-python'
 Plug 'isobit/vim-caddyfile'
+Plug 'bfrg/vim-cpp-modern'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'         " Base16 themes
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 " Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
 " Plug 'fatih/molokai'                  " Monokai and friends
 " Plug 'crusoexia/vim-monokai'
 " Plug 'phanviet/vim-monokai-pro'
-Plug 'patstockwell/vim-monokai-tasty'
+" Plug 'patstockwell/vim-monokai-tasty'
 " Plug 'erichdongubler/vim-sublime-monokai'
 " Plug 'flazz/vim-colorschemes'          " Bunch of color schemes
 Plug 'sainnhe/sonokai'                 " Monokai Pro-like scheme
-Plug 'tanvirtin/monokai.nvim'
+" Plug 'tanvirtin/monokai.nvim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'srcery-colors/srcery-vim'
 " Plug 'vim-airline/vim-airline'
@@ -152,6 +154,10 @@ if has('nvim-0.5')
     " Plug 'kyazdani42/nvim-tree.lua'
 
     " Plug 'TimUntersberger/neogit'
+endif
+
+if (has('nvim'))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
 call plug#end()
@@ -186,10 +192,10 @@ endif
 
 " Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:molokai_original = 0
-
+" let g:molokai_original = 0
 if has('gui_running')
-    colorscheme base16-gruvbox-dark-hard
+    autocmd vimenter * ++nested colorscheme gruvbox
+    " colorscheme base16-gruvbox-dark-hard
 elseif exists("+termguicolors")
     set termguicolors
     " The commands below are needed for tmux + termguicolors
@@ -201,13 +207,19 @@ elseif exists("+termguicolors")
     set background=dark
     set t_Co=256
 
-    colorscheme vim-monokai-tasty
+    " let g:tokyonight_style = "day"
+    let g:tokyonight_italic_functions = 1
+    colorscheme tokyonight
+    " autocmd vimenter * colorscheme gruvbox
+    " colorscheme molokai
+    " colorscheme vim-monokai-tasty
     " colorscheme sonokai
     " let g:sonokai_style = 'shusia'
 
 elseif &t_Co < 256
     colorscheme molokai
-    set nocursorline " looks bad in this mode
+    " colorscheme gruvbox
+    " set nocursorline " looks bad in this mode
 endif
 
 " if &diff
@@ -496,6 +508,7 @@ if !exists("*VSCodeNotify") && isdirectory($HOME . "/.vim/plugged/coc.nvim")
 
     " Lightline mods for CoC compatibility
     let g:lightline = {
+          \ 'colorscheme': 'tokyonight',
           \ 'active': {
           \   'left': [ [ 'mode', 'paste' ],
           \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified', 'fugitive' ] ],
@@ -585,6 +598,9 @@ endif
 " * NERDTree
 " Close vim if only window left is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" set guifont=MesloLGS_NF_Font:h11
+" Open the existing NERDTree on each new tab.
+" autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 
 " * FZF
 set rtp+=/usr/local/opt/fzf
@@ -730,6 +746,10 @@ nnoremap <Leader>` :Startify<CR>
 nnoremap <Leader>`z :vsp ~/.zshrc<CR>
 nnoremap <Leader>`v :vsp ~/.vimrc<CR>
 nnoremap <Leader>rv :source ~/.vimrc<CR>
+
+" set colorscheme
+nnoremap <silent> <leader>ct :colorscheme tokyonight<CR>
+nnoremap <silent> <leader>cg :colorscheme gruvbox<CR>
 
 " S    --  save session,  After saving a Vim session, you can reopen it with vim -S.
 " nnoremap <Leader>S :mksession<CR>
