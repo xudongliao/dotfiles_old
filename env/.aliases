@@ -12,6 +12,7 @@ function alias_if_exists() {
 alias crontab="VIM_CRONTAB=true crontab"
 alias_if_exists 'diff' 'colordiff'
 alias_if_exists 'ag' 'rg'
+alias_if_exists 'vi' 'nvim'
 alias_if_exists 'vim' 'nvim'
 alias_if_exists 'fdupes' 'jdupes'
 
@@ -73,7 +74,7 @@ alias printpath='echo $PATH | sed "s/:/\\n/g"'
 # Other
 # alias matlabc='matlab -nodesktop -nosplash'
   # Create separator using current columns
-alias sep='tput cols | python -c "import sys; print(\"=\"*int(sys.stdin.read().strip()))"'
+alias sep='tput cols | python3 -c "import sys; print(\"=\"*int(sys.stdin.read().strip()))"'
 alias rg="sep; rg -u"
 
 alias clock='watch -n 0.1 "date +"%H:%M:%S" | toilet -f bigmono9"' # -f future

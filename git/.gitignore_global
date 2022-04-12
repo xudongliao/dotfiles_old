@@ -23,3 +23,7 @@ node_modules
 
 # RSA keys, just in case
 *rsa*
+
+# ccls related
+.ccls
+.ccls-cache

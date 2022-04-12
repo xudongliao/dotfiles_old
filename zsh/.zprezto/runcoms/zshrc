@@ -64,7 +64,7 @@ if [ -f $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   if [ -f $HOME/.zsh_highlight ]; then
     source $HOME/.zsh_highlight
-  fi 
+  fi
 fi
 
 
@@ -96,4 +96,9 @@ fi
 # tools
 if [ -f ~/.tools ]; then
     source ~/.tools
+fi
+
+# private env variables
+if [ -f ~/.env_private ]; then
+    source ~/.env_private
 fi
