@@ -63,7 +63,7 @@ Plug 'aymericbeaumet/vim-symlink'     " Resolve symlinks before editing, plays n
 " Git GUI
 Plug 'airblade/vim-gitgutter'         " Git gutter
 Plug 'tpope/vim-fugitive'             " Git interface
-Plug 'tpope/vim-rhubarb'                    " Enable GBrowse from fugitive for GitHub
+Plug 'tpope/vim-rhubarb'              " Enable GBrowse from fugitive for GitHub
 Plug 'junegunn/gv.vim'                " TIG like navigation for vim
 Plug 'xuyuanp/nerdtree-git-plugin'    " Show status of files in NerdTree
 Plug 'tveskag/nvim-blame-line'        " Add git blame on line
@@ -80,7 +80,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'ervandew/supertab'
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'honza/vim-snippets'
 " Syntactic language support
 Plug 'w0rp/ale'                        " Linting engine
 Plug 'maximbaz/lightline-ale'          " Lightline + Ale
@@ -115,6 +115,7 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'         " Base16 themes
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 " Plug 'gerw/vim-hilinktrace'            " Syntax Highlighting Tracer
 " Plug 'fatih/molokai'                  " Monokai and friends
 " Plug 'crusoexia/vim-monokai'
@@ -167,7 +168,6 @@ if isdirectory($HOME . "/.vim/plugged/coc.nvim")
        \'coc-explorer',
        \'coc-git',
        \'coc-go',
-       \'coc-highlight',
        \'coc-highlight',
        \'coc-pyright',
        \'coc-json',
@@ -604,7 +604,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " * FZF
 set rtp+=/usr/local/opt/fzf
-let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_layout = { 'down': '~30%' }
 
 
 " * Limelight
@@ -667,9 +667,6 @@ map <C-h> :History<CR>
 " <Nothing> -- vim-which-key
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
-"  ;  --   FZF
-nmap <Leader>; :Buffers<CR>
-
 "  <Space>  --  <leader><leader> toggles between buffers
 nnoremap <Leader><Leader> <c-^>
 
@@ -694,6 +691,7 @@ vmap <Leader>p "+p
 vmap <Leader>P "+P
 
 "  e g H -- FZF
+nmap <Leader>; :Buffers<CR>
 nnoremap <Leader>g :Rg<CR>
 nnoremap <Leader>e :Files<CR>
 nnoremap <Leader>H :History<CR>
@@ -749,7 +747,6 @@ nnoremap <Leader>rv :source ~/.vimrc<CR>
 
 " set colorscheme
 nnoremap <silent> <leader>ct :colorscheme tokyonight<CR>
-nnoremap <silent> <leader>cg :colorscheme gruvbox<CR>
 
 " S    --  save session,  After saving a Vim session, you can reopen it with vim -S.
 " nnoremap <Leader>S :mksession<CR>
@@ -775,43 +772,6 @@ nnoremap <Leader>x :tabclose<CR>
 " rn F a ac af U -- Conquer of Completion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 if exists('g:coc_custom_config')
-    " Symbol renaming.
-    nmap <leader>rn <Plug>(coc-rename)
-
-    nmap <Leader>! :<C-u>CocList diagnostics<CR>
-
-    " TODO figure out
-    " Formatting selected code.
-    " xmap <leader>F  <Plug>(coc-format-selected)
-    " nmap <leader>F  <Plug>(coc-format-selected)
-    " Applying codeAction to the selected region.
-    " Example: `<leader>aap` for current paragraph
-    " xmap <leader>a  <Plug>(coc-codeaction-selected)
-    " nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-    " Remap keys for applying codeAction to the current buffer.
-    " nmap <leader>ac  <Plug>(coc-codeaction)
-    " Apply AutoFix to problem on the current line.
-    " nmap <leader>af  <Plug>(coc-fix-current)
-
-    """"""""""""" Coc-Git
-    " Undo git chunk (closest to linewise undo)
-    nmap <Leader>U :CocCommand git.chunkUndo<CR>
-    " Toggle GitGutter
-    nmap <Leader>og :CocCommand git.toggleGutters<CR>
-    " " navigate chunks of current buffer
-    nmap [c <Plug>(coc-git-prevchunk)
-    nmap ]c <Plug>(coc-git-nextchunk)
-    " show chunk diff at current position
-    nmap gs <Plug>(coc-git-chunkinfo)
-    " show commit contains current position
-    nmap gc <Plug>(coc-git-commit)
-    " " create text object for git chunks
-    omap ig <Plug>(coc-git-chunk-inner)
-    xmap ig <Plug>(coc-git-chunk-inner)
-    omap ag <Plug>(coc-git-chunk-outer)
-    xmap ag <Plug>(coc-git-chunk-outer)
-
     " Play nicely with EasyMotion
     autocmd User EasyMotionPromptBegin silent! CocDisable
     autocmd User EasyMotionPromptEnd silent! CocEnable
